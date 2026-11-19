@@ -3,20 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Cover Lab — GTA-style cover art maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="controls" aria-label="Cover controls">
+    <header>
+      <h1>Vice Cover Lab</h1>
+      <p>Your photo and a caption, made into GTA-style cover art. Everything runs on your machine — no upload.</p>
+    </header>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <label class="file">Add your photos
+        <input id="photos" type="file" accept="image/*" multiple>
+      </label>
+      <div class="samples" aria-label="Sample scenes">
+        <button id="sample-boulevard" type="button">Boulevard</button>
+        <button id="sample-neon" type="button">Neon street</button>
+        <button id="sample-pier" type="button">Pier</button>
+      </div>
+      <div id="thumbs" class="thumbs" aria-label="Loaded photos"></div>
+      <p class="hint">Click a panel in the preview, then a thumbnail to place that photo there. Drag a panel to move its photo.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout</legend>
+      <div id="layoutPicker" class="picker"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Grade</legend>
+      <div id="gradePicker" class="picker"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Caption</legend>
+      <label>Title <input id="title" type="text" maxlength="28" value="Neon Shore"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="Vice City nights"></label>
+      <label>Tagline <input id="tagline" type="text" maxlength="30" value="Est. 2026"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Selected panel</legend>
+      <p id="panelLabel" class="panel-label">Panel 1 of 4</p>
+      <label>Zoom <input id="zoom" type="range" min="100" max="260" value="100"></label>
+      <div class="row">
+        <button id="centerPanel" type="button">Centre photo</button>
+        <button id="fillAll" type="button">One photo, all panels</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>6 · Finish</legend>
+      <div id="sizePicker" class="picker"></div>
+      <label class="check"><input id="frameToggle" type="checkbox" checked> Poster frame</label>
+      <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+      <div class="row">
+        <button id="export" type="button" class="primary">Export PNG</button>
+        <button id="exportAll" type="button">Export all 3 sizes</button>
+      </div>
+      <p id="status" role="status"></p>
+    </fieldset>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
